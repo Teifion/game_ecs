@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"file_exclude_patterns":
+			[
+				"game_ecs.sublime-*"
+			],
+			"folder_exclude_patterns":
+			[
+				"_build",
+				"deps"
+			],
+			"path": "."
+		}
+	]
+}
