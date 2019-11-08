@@ -1,17 +1,15 @@
-defmodule GameEcs.AgeComponent do
+defmodule GameEcs.IdComponent do
   @moduledoc """
     A component for keeping an age for something.
 
-    {id: pid, state: state} = AgeComponent.new(%{age: 1})
+    {id: pid, state: state} = IdComponent.new(%{age: 1})
   """
   use GameEcs.Component
   
   @component_type __MODULE__
   
   @doc "Initializes and validates state"
-  def new(entity, %{age: _age} = initial_state) do
-    initial_state = Map.merge(initial_state, %{birth: :os.system_time(:millisecond)})
-    
+  def new(entity, %{name: _name} = initial_state) do
     GameEcs.Component.new(@component_type, entity, initial_state)
   end
 end

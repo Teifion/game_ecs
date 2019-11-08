@@ -6,7 +6,7 @@ defmodule GameEcs.TimeSystem do
   require Logger
 
   def process do
-    GameEcs.Registry.get(:"Elixir.GameEcs.PositionComponent")
+    GameEcs.ComponentRegistry.get(:"Elixir.GameEcs.PositionComponent")
     |> Enum.each(fn (pid) -> dispatch(pid, :increment) end)
   end
 

@@ -9,12 +9,13 @@ defmodule GameEcs.Supervisor do
 
   def init(:ok) do
     children = [
-      # worker(GameEcs.Registry, [[name: GameEcs.Registry]])
-      worker(GameEcs.Registry, []),
+      # worker(GameEcs.ComponentRegistry, [[name: GameEcs.ComponentRegistry]])
+      worker(GameEcs.ComponentRegistry, []),
+      worker(GameEcs.EntityRegistry, []),
       worker(GameEcs.Loop, [%{start_time: :os.system_time(:millisecond), tick_time: 1000/@ticks_per_second, update_ticks: @ticks_per_second}]),
-      # worker(GameEcs.Loader, [])
+      worker(GameEcs.Recorder, []),
     ]
-    
+
     supervise(children, strategy: :one_for_one)
   end
 end

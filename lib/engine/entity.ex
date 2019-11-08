@@ -3,28 +3,37 @@ defmodule GameEcs.Entity do
     A base for creating new Entities.
   """
 
-  defstruct [:id, :components]
+  defstruct [:id, :type, :components]
 
   @type id :: String.t
+  @type type :: String.t
   @type components :: list(GameEcs.Component)
   @type t :: %GameEcs.Entity{
     id: String.t,
+    type: type,
+    # name: String.t,
     components: components
   }
 
   @doc "Creates a new entity"
-  @spec build(components) :: t
-  def build(components) do
-    %GameEcs.Entity{
+  @spec build(type, components) :: t
+  def build(type, components) do
+    entity = %GameEcs.Entity{
       id: GameEcs.Crypto.random_string(64),
+      type: type,
       components: components
     }
+
+    GameEcs.EntityRegistry.insert(type, entity) # Register component for systems to reference
+
+    entity
   end
 
   @doc "Add components at runtime"
-  def add(%GameEcs.Entity{ id: id, components: components}, component) do
+  def add(%GameEcs.Entity{id: id, type: type, components: components}, component) do
     %GameEcs.Entity{
       id: id,
+      type: type,
       components: components ++ [component]
     }
   end

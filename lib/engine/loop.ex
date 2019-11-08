@@ -1,6 +1,7 @@
 defmodule GameEcs.Loop do
   use GenServer
   
+  alias GameEcs.Recorder
   require Logger
 
   def start_link(args) do
@@ -18,7 +19,7 @@ defmodule GameEcs.Loop do
   end
   
   def begin(max_ticks) do
-    IO.puts "BEGIN"
+    Recorder.record("Begin", [:engine_loop])
     GenServer.call(__MODULE__, {:begin, max_ticks})
   end
 
@@ -34,12 +35,12 @@ defmodule GameEcs.Loop do
   end
 
   def handle_info(:main_loop, state) do
-    start_time = :os.system_time(:millisecond)
+    # start_time = :os.system_time(:millisecond)
     
     state = main_loop(state)
     
-    target_ms = start_time + state.tick_time
-    actual_ms = Kernel.max(target_ms - :os.system_time(:millisecond), 0)
+    # target_ms = start_time + state.tick_time
+    # actual_ms = Kernel.max(target_ms - :os.system_time(:millisecond), 0)
     
     if state.ticks <= state.max_ticks do
       # schedule(actual_ms)
@@ -63,10 +64,7 @@ defmodule GameEcs.Loop do
 
   defp send_update(state) do
     {{_, _, _}, {_, m, s}} = :calendar.universal_time()
-    
-    Logger.debug fn ->
-      "UPDATE SENT #{state.ticks} at #{m}:#{s}"
-    end
+    Recorder.record("Update sent: #{state.ticks} at #{m}:#{s}", [:engine_loop])
   end
 
   defp main_loop(state) do
@@ -76,9 +74,13 @@ defmodule GameEcs.Loop do
     
     # IO.puts "GameEcs.Loop after #{elapsed}, tick: #{state.ticks}"
     
+    Recorder.record("Tick #{state.ticks} starting", [:engine_loop, :tick])
+    
     GameEcs.TimeSystem.process
+    GameEcs.ActionSystem.process
     GameEcs.VelocitySystem.process
     
+    Recorder.record("Tick #{state.ticks} completed", [:engine_loop, :tick])
     Map.merge(state, %{ticks: state.ticks + 1})
   end
 

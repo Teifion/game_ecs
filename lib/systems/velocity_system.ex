@@ -6,7 +6,7 @@ defmodule GameEcs.VelocitySystem do
   require Logger
 
   def process do
-    GameEcs.Registry.get(:"Elixir.GameEcs.PositionComponent")
+    GameEcs.ComponentRegistry.get(:"Elixir.GameEcs.PositionComponent")
     |> Enum.each(fn (pid) -> dispatch(pid, :drift) end)
   end
 
@@ -14,11 +14,12 @@ defmodule GameEcs.VelocitySystem do
   defp dispatch(pid, _action) do
     %{id: _pid, state: s} = GameEcs.Component.get(pid)
 
-    new_state = %{
+    new_state = Map.merge(s, %{
       posx: s.posx + s.velx,
       posy: s.posy + s.vely,
       posz: s.posz + s.velz,
-    }
+    })
+
     Logger.debug fn ->
       "Updated #{inspect pid} to #{inspect new_state}"
     end

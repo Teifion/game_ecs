@@ -1,11 +1,11 @@
-defmodule GameEcs.Registry do
+defmodule GameEcs.ComponentRegistry do
   @moduledoc """
     Component registry. Used by systems to locate components of its type.
 
-    iex> {:ok, r} = GameEcs.Registry.start
-    iex> GameEcs.Registry.insert("test", r)
+    iex> {:ok, r} = GameEcs.ComponentRegistry.start
+    iex> GameEcs.ComponentRegistry.insert("test", r)
     :ok
-    iex> GameEcs.Registry.get("test")
+    iex> GameEcs.ComponentRegistry.get("test")
     [#PID<0.87.0>]
   """
 

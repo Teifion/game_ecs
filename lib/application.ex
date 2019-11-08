@@ -26,7 +26,7 @@ defmodule GameEcs do
     children = [
       # Start the Ecto repository
       supervisor(GameEcs.Supervisor, []),
-      # worker(GameEcs.Registry, [[name: GameEcs.Registry]]),
+      # worker(GameEcs.ComponentRegistry, [[name: GameEcs.ComponentRegistry]]),
       
       
       # # Start the endpoint when the application starts
@@ -72,7 +72,7 @@ defmodule GameEcs do
     # :observer.start
     
     GameEcs.Loader.load("assets/game.json")
-    GameEcs.Loop.begin(1200)
+    GameEcs.Loop.begin(5)
     
     # card1 = GameEcs.Ship.new()
     # _card2 = GameEcs.Card.new(visual: %{name: "Card 2", x: 2, y: 1, icon: ""})
