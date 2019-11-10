@@ -17,16 +17,15 @@ defmodule GameEcs.EntityRegistry do
     Agent.start_link(fn -> %{} end, name: __MODULE__)
   end
 
-  def insert(entity_type, entity) do
+  def insert(entity_id, entity) do
     Agent.update(__MODULE__, fn(registry) ->
-      entities = (Map.get(registry, entity_type, []) ++ [entity])
-      Map.put(registry, entity_type, entities)
+      Map.put(registry, entity_id, entity)
     end)
   end
 
-  def get(entity_type) do
+  def get(entity_id) do
     Agent.get(__MODULE__, fn(registry) ->
-      Map.get(registry, entity_type, [])
+      Map.get(registry, entity_id, nil)
     end)
   end
 end

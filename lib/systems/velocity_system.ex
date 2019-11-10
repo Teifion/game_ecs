@@ -3,7 +3,7 @@ defmodule GameEcs.VelocitySystem do
     Increments ages of AgeComponents
   """
 
-  require Logger
+  alias GameEcs.Recorder
 
   def process do
     GameEcs.ComponentRegistry.get(:"Elixir.GameEcs.PositionComponent")
@@ -20,9 +20,7 @@ defmodule GameEcs.VelocitySystem do
       posz: s.posz + s.velz,
     })
 
-    Logger.debug fn ->
-      "Updated #{inspect pid} to #{inspect new_state}"
-    end
+    Recorder.record("Updated #{s.entity} position to #{inspect new_state}", [:action_system, :acquire_target])
 
     GameEcs.Component.update(pid, new_state)
   end

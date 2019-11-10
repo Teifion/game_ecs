@@ -7,14 +7,14 @@ defmodule GameEcs.AiComponent do
   @component_type __MODULE__
 
   @doc "Initializes and validates state"
-  def new(entity, %{
+  def new(%{
     target: _
     } = initial_state) do
-    GameEcs.Component.new(@component_type, entity, initial_state)
+    GameEcs.Component.new(@component_type, initial_state)
   end
   
-  def new(entity, target) do
-    new(entity, %{
+  def new(target) do
+    new(%{
       target: target
     })
   end

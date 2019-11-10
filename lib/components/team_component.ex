@@ -1,4 +1,4 @@
-defmodule GameEcs.PositionComponent do
+defmodule GameEcs.TeamComponent do
   @moduledoc """
 
     {id: pid, state: state} = PositionComponent.new(%{posx: 1, posy: 2, posz: 3, velx: 4, vely: 5, velz: 6})
@@ -11,18 +11,14 @@ defmodule GameEcs.PositionComponent do
 
   @doc "Initializes and validates state"
   def new(%{
-    fxy: _, fyz: _,
-    posx: _, posy: _, posz: _,
-    velx: _, vely: _, velz: _
+    team: _
     } = initial_state) do
     GameEcs.Component.new(@component_type, initial_state)
   end
   
-  def new([[posx, posy, posz], [velx, vely, velz], [fxy, fyz]]) do
+  def new(team) do
     new(%{
-      fxy: fxy, fyz: fyz,
-      posx: posx, posy: posy, posz: posz,
-      velx: velx, vely: vely, velz: velz
+      team: team
     })
   end
 end

@@ -65,14 +65,10 @@ defmodule GameEcs do
 
     # entities = GameEcs.Loader.load_json()
     
-    # IO.puts ""
-    # IO.inspect entities
-    # IO.puts ""
-    
     # :observer.start
     
     GameEcs.Loader.load("assets/game.json")
-    GameEcs.Loop.begin(5)
+    GameEcs.Loop.begin(2)
     
     # card1 = GameEcs.Ship.new()
     # _card2 = GameEcs.Card.new(visual: %{name: "Card 2", x: 2, y: 1, icon: ""})

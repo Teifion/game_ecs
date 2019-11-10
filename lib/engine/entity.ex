@@ -3,37 +3,43 @@ defmodule GameEcs.Entity do
     A base for creating new Entities.
   """
 
-  defstruct [:id, :type, :components]
+  alias GameEcs.EntityRegistry
+  alias GameEcs.Component
+
+  defstruct [:id, :components]
 
   @type id :: String.t
-  @type type :: String.t
-  @type components :: list(GameEcs.Component)
+  @type components :: list(Component)
   @type t :: %GameEcs.Entity{
     id: String.t,
-    type: type,
     # name: String.t,
     components: components
   }
 
   @doc "Creates a new entity"
-  @spec build(type, components) :: t
-  def build(type, components) do
+  @spec build(components) :: t
+  def build(components) do
+    entity_id = GameEcs.Crypto.random_string(64)
+
+    components = components
+    |> Enum.map(fn %{id: id, state: state} ->
+      Component.update(id, Map.put(state, :entity, entity_id))
+    end)
+
     entity = %GameEcs.Entity{
-      id: GameEcs.Crypto.random_string(64),
-      type: type,
+      id: entity_id,
       components: components
     }
 
-    GameEcs.EntityRegistry.insert(type, entity) # Register component for systems to reference
+    EntityRegistry.insert(entity_id, entity) # Register component for systems to reference
 
     entity
   end
 
   @doc "Add components at runtime"
-  def add(%GameEcs.Entity{id: id, type: type, components: components}, component) do
+  def add(%GameEcs.Entity{id: id, components: components}, component) do
     %GameEcs.Entity{
       id: id,
-      type: type,
       components: components ++ [component]
     }
   end
@@ -43,9 +49,40 @@ defmodule GameEcs.Entity do
   def reload(%GameEcs.Entity{ id: _id, components: components} = entity) do
     updated_components = components
       |> Enum.map(fn %{id: pid} ->
-        GameEcs.Component.get(pid)
+        Component.get(pid)
       end)
 
     %{entity | components: updated_components}
+  end
+
+  @doc "Pulls components for entity"
+  @spec get_components(id) :: List.t
+  def get_components(entity_id) do
+    entity = entity_id
+    |> EntityRegistry.get()
+    
+    reload(entity).components
+  end
+  
+  @spec get_components(id, String.t) :: GameEcs.Component.t
+  def get_components(entity_id, component_type) do
+    entity = entity_id
+    |> EntityRegistry.get()
+
+    reload(entity).components
+    |> Enum.filter(fn c ->
+      c.type == component_type
+    end)
+  end
+  
+  @doc """
+  Gets a singular value from a singular component of this enttiy
+  """
+  def get_component_property(entity_id, component_type, property_name) do
+    get_components(entity_id)
+    |> Enum.filter(fn c -> c.state.type == :"Elixir.GameEcs.#{component_type}" end)
+    |> hd
+    |> Map.get(:state)
+    |> Map.get(property_name)
   end
 end

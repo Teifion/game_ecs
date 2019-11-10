@@ -2,6 +2,7 @@
   "ships": [
     {
       "name": "Ship 1",
+      "team": "Team 1",
       
       "facing": [0, 0],
       "position": [0, 0, 0],
@@ -10,6 +11,7 @@
     },
     {
       "name": "Ship 2",
+      "team": "Team 2",
 
       "facing": [0, 0],
       "position": [100, 0, 0],

@@ -30,7 +30,8 @@ defmodule GameEcs.Loader do
       [thrust, turn] = s["acceleration"]
 
       GameEcs.Ship.new(
-        position: [[px, py, pz], [vx, vy, vz], [fxy, fyz]]
+        position: [[px, py, pz], [vx, vy, vz], [fxy, fyz]],
+        team: s["team"],
       )
     end)
   end
