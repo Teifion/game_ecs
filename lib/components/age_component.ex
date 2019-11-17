@@ -9,9 +9,9 @@ defmodule GameEcs.AgeComponent do
   @component_type __MODULE__
   
   @doc "Initializes and validates state"
-  def new(entity, %{age: _age} = initial_state) do
+  def new(%{age: _age} = initial_state) do
     initial_state = Map.merge(initial_state, %{birth: :os.system_time(:millisecond)})
     
-    GameEcs.Component.new(@component_type, entity, initial_state)
+    GameEcs.Component.new(@component_type, initial_state)
   end
 end

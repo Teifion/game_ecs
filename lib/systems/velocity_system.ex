@@ -6,7 +6,7 @@ defmodule GameEcs.VelocitySystem do
   alias GameEcs.Recorder
 
   def process do
-    GameEcs.ComponentRegistry.get(:"Elixir.GameEcs.PositionComponent")
+    GameEcs.ComponentRegistry.get("PositionComponent")
     |> Enum.each(fn (pid) -> dispatch(pid, :drift) end)
   end
 

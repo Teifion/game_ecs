@@ -9,7 +9,7 @@ defmodule GameEcs.IdComponent do
   @component_type __MODULE__
   
   @doc "Initializes and validates state"
-  def new(entity, %{name: _name} = initial_state) do
-    GameEcs.Component.new(@component_type, entity, initial_state)
+  def new(%{name: _name} = initial_state) do
+    GameEcs.Component.new(@component_type, initial_state)
   end
 end

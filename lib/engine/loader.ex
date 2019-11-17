@@ -24,15 +24,19 @@ defmodule GameEcs.Loader do
   def _load_ships(ships) do
     ships
     |> Enum.map(fn s ->
-      [fxy, fyz] = s["facing"]
-      [px, py, pz] = s["position"]
-      [vx, vy, vz] = s["velocity"]
-      [thrust, turn] = s["acceleration"]
-
-      GameEcs.Ship.new(
-        position: [[px, py, pz], [vx, vy, vz], [fxy, fyz]],
-        team: s["team"],
-      )
+      if s["name"] == "Ship 1" do
+        GameEcs.Ship.new(
+          position: [s["position"], s["velocity"], s["facing"]],
+          specs: [s["acceleration"]],
+          team: s["team"],
+        )
+      else
+        GameEcs.Ship.new2(
+          position: [s["position"], s["velocity"], s["facing"]],
+          specs: [s["acceleration"]],
+          team: s["team"],
+        )
+      end
     end)
   end
 end

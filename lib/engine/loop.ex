@@ -78,6 +78,7 @@ defmodule GameEcs.Loop do
     
     GameEcs.TimeSystem.process
     GameEcs.ActionSystem.process
+    GameEcs.ThrustSystem.process
     GameEcs.VelocitySystem.process
     
     Recorder.record("Tick #{state.ticks} completed", [:engine_loop, :tick])

@@ -10,6 +10,13 @@ defmodule GameEcs.AiComponent do
   def new(%{
     target: _
     } = initial_state) do
+    
+    # Defaults
+    initial_state = Map.merge(initial_state, %{
+      ai_turn: nil,
+      ai_thrust_flag: false,
+      ai_thrust: nil
+    })
     GameEcs.Component.new(@component_type, initial_state)
   end
   
