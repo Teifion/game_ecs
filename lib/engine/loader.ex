@@ -31,7 +31,7 @@ defmodule GameEcs.Loader do
           team: s["team"],
         )
       else
-        GameEcs.Ship.new2(
+        GameEcs.Ship.new(
           position: [s["position"], s["velocity"], s["facing"]],
           specs: [s["acceleration"]],
           team: s["team"],

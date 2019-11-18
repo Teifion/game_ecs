@@ -43,9 +43,9 @@ defmodule GameEcs.ComponentRegistry do
     |> Enum.map(&get/1)
     |> Enum.map(&split_components/1)
     |> reduce_combo
-    |> IO.inspect
   end
   
+  @spec split_components(List.t) :: List.t
   defp split_components(clist) do
     # Takes a list of component pids and returns
     # a pair {entity_id, component}
@@ -55,6 +55,7 @@ defmodule GameEcs.ComponentRegistry do
   end
   
   # Take out the first item, we use that as something to build from as we go
+  @spec reduce_combo(List.t) :: Map.t
   defp reduce_combo([acc | clist]) do
     acc
     |> Enum.map(fn {key, dict} -> {key, [dict]} end)
@@ -62,6 +63,7 @@ defmodule GameEcs.ComponentRegistry do
     |> reduce_combo(clist)
   end
   
+  @spec reduce_combo(Map.t, List.t) :: Map.t
   defp reduce_combo(acc, []) do
     acc
   end

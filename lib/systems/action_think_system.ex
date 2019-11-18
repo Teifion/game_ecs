@@ -1,4 +1,4 @@
-defmodule GameEcs.ActionSystem do
+defmodule GameEcs.ActionThinkSystem do
     @moduledoc """
     Allows entities with an AI component to make decisions
   """
