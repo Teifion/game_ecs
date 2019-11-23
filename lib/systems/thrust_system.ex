@@ -35,12 +35,12 @@ defmodule GameEcs.ThrustSystem do
     
     # Do we apply thrust?
     new_velocity = if ai_c.ai_thrust != 0 do
-      {phys_x, phys_y, phys_z} = Physics.apply_thrust(new_facing, ai_c.ai_thrust)
+      {physx, physy, physz} = Physics.apply_thrust(new_facing, ai_c.ai_thrust)
       
       %{
-        vel_x: pos_c.vel_x + phys_x,
-        vel_y: pos_c.vel_x + phys_y,
-        vel_z: pos_c.vel_x + phys_z,
+        velx: pos_c.velx + physx,
+        vely: pos_c.velx + physy,
+        velz: pos_c.velx + physz,
       }
     else
       %{}
