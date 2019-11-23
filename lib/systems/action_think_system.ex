@@ -24,18 +24,17 @@ defmodule GameEcs.ActionThinkSystem do
     state = if state.target != nil, do: face_target(state), else: state
 
     # Move!
-    state = if state.ai_thrust_flag, do: approach_target(state), else: state
+    state = if state.ai_thrust != 0, do: approach_target(state), else: state
     
     GameEcs.Component.update(pid, state)
   end
   
-  defp reset_flags(state) do
-    Map.merge(state, %{
-      ai_turn: nil,
-      ai_thrust_flag: false,
-      ai_thrust: nil
-    })
-  end
+  # defp reset_flags(state) do
+  #   Map.merge(state, %{
+  #     ai_turn: nil,
+  #     ai_thrust: nil
+  #   })
+  # end
 
   defp acquire_target(self_state) do
     # We need to know what team we're on
@@ -60,7 +59,7 @@ defmodule GameEcs.ActionThinkSystem do
   end
   
   defp face_target(self_state) do
-    self_state = Map.put(self_state, :ai_turn, [45, -45])
+    self_state = Map.put(self_state, :ai_turn, {45, -45})
 
     Recorder.record("Updated #{self_state.entity} ai_turn to #{inspect self_state.ai_turn}", [:action_system, :face_target])
 

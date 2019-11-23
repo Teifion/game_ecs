@@ -65,7 +65,7 @@ defmodule GameEcs.Recorder do
       entries: [],
       prefs: %{
         method: :whitelist,
-        tags: [:ai, :turn, :thrust]
+        tags: [:ai, :turn, :thrust, :thrust_system]
       }
     }}
   end

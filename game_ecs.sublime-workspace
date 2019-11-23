@@ -5,7 +5,39 @@
 		[
 			[
 				"enum",
-				"enum\tEnum.map"
+				"enum\tEnum.filter"
+			],
+			[
+				"comp",
+				"component_types"
+			],
+			[
+				"ac",
+				"acquire_target"
+			],
+			[
+				"enti",
+				"entity_list"
+			],
+			[
+				"ent",
+				"entity_list"
+			],
+			[
+				"componen",
+				"component_type"
+			],
+			[
+				"Enti",
+				"EntityRegistry"
+			],
+			[
+				"defm",
+				"defmod\tdefmodule"
+			],
+			[
+				"def",
+				"def\tdef"
 			],
 			[
 				"user",
@@ -154,10 +186,6 @@
 			[
 				"empl",
 				"employee_count"
-			],
-			[
-				"comp",
-				"completion_generation_at"
 			],
 			[
 				"insert",
@@ -486,79 +514,34 @@
 			[
 				"redir",
 				"redirected_to"
-			],
-			[
-				"pero",
-				"perform_with_details"
-			],
-			[
-				"jph",
-				"jphase_data"
-			],
-			[
-				"rule",
-				"rule_type"
-			],
-			[
-				"re",
-				"requirement"
-			],
-			[
-				"requ",
-				"requirements"
-			],
-			[
-				"Pipe",
-				"PipelineLib"
-			],
-			[
-				"pyra",
-				"pyramid_rule_path"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "lib/application.ex",
+			"file": "lib/systems/action_think_system.ex",
 			"settings":
 			{
-				"buffer_size": 2264,
+				"buffer_size": 1996,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/otp/supervisor.ex",
+			"file": "lib/systems/action_move_system.ex",
 			"settings":
 			{
-				"buffer_size": 542,
+				"buffer_size": 2430,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "lib/engine/loader.ex",
+			"file": "lib/engine/recorder.ex",
 			"settings":
 			{
-				"buffer_size": 690,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/components/position_component.ex",
-			"settings":
-			{
-				"buffer_size": 408,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "lib/systems/velocity_system.ex",
-			"settings":
-			{
-				"buffer_size": 905,
+				"buffer_size": 1525,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -646,37 +629,61 @@
 	"expanded_folders":
 	[
 		"/home/teifion/programming/elixir/game_ecs",
-		"/home/teifion/programming/elixir/game_ecs/assets",
 		"/home/teifion/programming/elixir/game_ecs/lib",
+		"/home/teifion/programming/elixir/game_ecs/lib/agents",
 		"/home/teifion/programming/elixir/game_ecs/lib/components",
 		"/home/teifion/programming/elixir/game_ecs/lib/engine",
+		"/home/teifion/programming/elixir/game_ecs/lib/entities",
 		"/home/teifion/programming/elixir/game_ecs/lib/otp",
 		"/home/teifion/programming/elixir/game_ecs/lib/systems"
 	],
 	"file_history":
 	[
-		"/home/teifion/programming/elixir/game_ecs/lib/components/position_component.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/entities/ship.ex",
+		"/home/teifion/Dropbox/lists/audiobooks.txt",
+		"/home/teifion/Dropbox/lists/reddit.txt",
+		"/home/teifion/Dropbox/lists/films.txt",
+		"/home/teifion/Dropbox/lists/youtube.txt",
+		"/home/teifion/Dropbox/lists/series.txt",
+		"/home/teifion/Dropbox/lists/interview_questions.txt",
+		"/home/teifion/programming/elixir/alacrity pre import/remote/servers.txt",
+		"/home/teifion/Dropbox/snippets/pwd.txt",
+		"/home/teifion/programming/elixir/game_ecs/lib/engine/recorder.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/application.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/otp/supervisor.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/specs_component.ex",
 		"/home/teifion/programming/elixir/game_ecs/lib/engine/loop.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/engine/loader.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/otp/component_registry.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/systems/thrust_system.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/engine/component.ex",
+		"/home/teifion/Dropbox/snippets/emails.txt",
+		"/home/teifion/Documents/v.txt",
+		"/home/teifion/programming/elixir/game_ecs/assets/game.json",
+		"/home/teifion/programming/elixir/game_ecs/lib/entities/ship.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/systems/action_system.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/id_component.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/age_component.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/agents/component_agent.ex",
+		"/home/teifion/factorio_settings.txt",
+		"/media/teifion/TEIFAT/mint install.sh",
+		"/home/teifion/programming/elixir/game_ecs/lib/systems/velocity_system.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/systems/time_system.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/ai_component.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/thrust_component.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/team_component.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/engine/entity.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/otp/entity_registry.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/components/position_component.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/engine/physics.ex",
+		"/home/teifion/programming/elixir/game_ecs/lib/otp/registry.ex",
 		"/home/teifion/tjsoftware/hmrc/hmrc",
 		"/home/teifion/tjsoftware/hmrc/acc details",
-		"/home/teifion/Documents/v.txt",
 		"/home/teifion/programming/elixir/game_ecs/README.md",
-		"/home/teifion/programming/elixir/game_ecs/lib/otp/supervisor.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/otp/registry.ex",
 		"/home/teifion/programming/elixir/game_ecs/lib/game_ecs.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/application.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/agents/component_agent.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/components/age_component.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/engine/component.ex",
 		"/home/teifion/programming/elixir/game_ecs/lib/engine/crypto.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/engine/entity.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/engine/loader.ex",
 		"/home/teifion/programming/elixir/game_ecs/lib/systems/magnet_system.ex",
-		"/home/teifion/programming/elixir/game_ecs/lib/systems/time_system.ex",
 		"/home/teifion/programming/elixir/game_ecs/mix.exs",
 		"/home/teifion/programming/elixir/game_ecs old/ecs/lib/application.ex",
-		"/home/teifion/programming/elixir/game_ecs/assets/game.json",
 		"/home/teifion/programming/elixir/game_ecs old/ecs/assets/game.json",
 		"/home/teifion/programming/elixir/game_ecs/game_ecs.sublime-project",
 		"/home/teifion/programming/elixir/game_ecs/ecs/lib/otp/supervisor.ex",
@@ -691,14 +698,11 @@
 		"/home/teifion/programming/elixir/game_ecs/apps/ecs/lib/entities/action.ex",
 		"/home/teifion/programming/elixir/game_ecs/apps/ecs/mix.exs",
 		"/home/teifion/programming/elixir/game_ecs/apps/ecs/lib/entities/card.ex",
-		"/home/teifion/Dropbox/snippets/pwd.txt",
 		"/home/teifion/programming/elixir/slowrealtimegame/assets/static/css/css/all.min.css",
 		"/home/teifion/.zshrc",
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/accounts/schemas/user.ex",
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/controllers/accounts/session_controller.ex",
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/router.ex",
-		"/home/teifion/Dropbox/lists/series.txt",
-		"/home/teifion/Dropbox/lists/youtube.txt",
 		"/home/teifion/Documents/w.txt",
 		"/home/teifion/programming/elixir/slowrealtimegame/scripts/queries.sql",
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/accounts/error_handler.ex",
@@ -762,27 +766,7 @@
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/lib/security_log_lib.ex",
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/lib/startup.ex",
 		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/lib/test_lib.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/plugs/page_view_log_plug.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/queries/page_view_log_queries.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/reports/tj_blog_views_report.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/reports/tj_site_views_report.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/schemas/aggregate_view_log.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/schemas/error_log.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/schemas/page_view_log.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/schemas/security_log.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/tasks/aggregate_logs_task.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/remote/initial_install.sh",
-		"/home/teifion/programming/elixir/slowrealtimegame/remote/metis_deploy.sh",
-		"/home/teifion/programming/elixir/slowrealtimegame/remote/systemd.sh",
-		"/home/teifion/programming/elixir/slowrealtimegame/test/support/conn_case.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/test/test_helper.exs",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/views/user_view.ex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/templates/accounts/user/edit.html.eex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/templates/accounts/user/index.html.eex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/templates/accounts/user/new.html.eex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/templates/accounts/user/show.html.eex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/templates/user/edit.html.eex",
-		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame_web/templates/user/index.html.eex"
+		"/home/teifion/programming/elixir/slowrealtimegame/lib/slowrealtimegame/logging/plugs/page_view_log_plug.ex"
 	],
 	"find":
 	{
@@ -801,6 +785,41 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"gand",
+			"state.",
+			"sark",
+			">>=",
+			"get_keys",
+			"SB",
+			"ComponentRegistry.get",
+			"IO.inspe",
+			"fxy",
+			"GameEcs.Component",
+			"update",
+			"entity",
+			"type",
+			"self(), ",
+			"compontents",
+			"opts",
+			"entity, ",
+			"ComponentRegistry",
+			"entitys",
+			"self",
+			"component",
+			"Component",
+			"IO.insp",
+			"Registry",
+			"1",
+			":",
+			"Recorder.record",
+			"EcsGame",
+			"GameEcs",
+			"add_items",
+			"send_update",
+			"Logger",
+			"AgeComponent",
+			"x",
+			"pos_",
 			" ",
 			"ECS",
 			"Crypto",
@@ -818,6 +837,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"ComponentRegistry",
 			"GameEcs",
 			"ECS"
 		],
@@ -830,149 +850,28 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "lib/application.ex",
+					"file": "lib/systems/action_think_system.ex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2264,
+						"buffer_size": 1996,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1556,
-								1556
+								842,
+								842
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 207.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "lib/otp/supervisor.ex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 542,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								439,
-								439
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lib/engine/loader.ex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 690,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								615,
-								615
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "lib/components/position_component.ex",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 408,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								255,
-								251
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "lib/systems/velocity_system.ex",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 905,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								672,
-								672
-							]
-						],
-						"settings":
-						{
-							"open_with_edit": true,
 							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -982,6 +881,66 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lib/systems/action_move_system.ex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2430,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1161,
+								1161
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 621.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/engine/recorder.ex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1525,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1480,
+								1480
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Elixir/Syntaxes/Elixir.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 392.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1036,36 +995,204 @@
 		"selected_items":
 		[
 			[
-				"pos",
-				"lib/components/position_component.ex"
-			],
-			[
-				"ship",
-				"lib/entities/ship.ex"
+				"rec",
+				"lib/engine/recorder.ex"
 			],
 			[
 				"super",
 				"lib/otp/supervisor.ex"
 			],
 			[
-				"regist",
-				"lib/otp/registry.ex"
+				"recor",
+				"lib/engine/recorder.ex"
+			],
+			[
+				"app",
+				"lib/application.ex"
+			],
+			[
+				"spec com",
+				"lib/components/specs_component.ex"
+			],
+			[
+				"loop",
+				"lib/engine/loop.ex"
+			],
+			[
+				"loader",
+				"lib/engine/loader.ex"
+			],
+			[
+				"comp re",
+				"lib/otp/component_registry.ex"
+			],
+			[
+				"act syst",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"gam",
+				"assets/game.json"
 			],
 			[
 				"loade",
 				"lib/engine/loader.ex"
 			],
 			[
-				"app",
-				"~/programming/elixir/game_ecs old/ecs/lib/application.ex"
+				"ship",
+				"lib/entities/ship.ex"
+			],
+			[
+				"load",
+				"lib/engine/loader.ex"
+			],
+			[
+				"game",
+				"assets/game.json"
+			],
+			[
+				"comp",
+				"lib/engine/component.ex"
+			],
+			[
+				"id comp",
+				"lib/components/id_component.ex"
+			],
+			[
+				"age ",
+				"lib/components/age_component.ex"
+			],
+			[
+				"age comp",
+				"lib/agents/component_agent.ex"
+			],
+			[
+				"comp reg",
+				"lib/otp/component_registry.ex"
+			],
+			[
+				"thur",
+				"lib/systems/thrust_system.ex"
+			],
+			[
+				"vel ",
+				"lib/systems/velocity_system.ex"
+			],
+			[
+				"ai com",
+				"lib/components/ai_component.ex"
+			],
+			[
+				"aci",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"ga",
+				"assets/game.json"
+			],
+			[
+				"enti",
+				"lib/engine/entity.ex"
+			],
+			[
+				"ent",
+				"lib/engine/entity.ex"
+			],
+			[
+				"enty",
+				"lib/otp/entity_registry.ex"
+			],
+			[
+				"acti",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"comp ",
+				"lib/engine/component.ex"
+			],
+			[
+				"aicom",
+				"lib/components/ai_component.ex"
+			],
+			[
+				"ent reg",
+				"lib/otp/entity_registry.ex"
+			],
+			[
+				"act",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"entyre",
+				"lib/otp/entity_registry.ex"
+			],
+			[
+				"entit",
+				"lib/engine/entity.ex"
+			],
+			[
+				"ai comp",
+				"lib/components/ai_component.ex"
+			],
+			[
+				"pos comp",
+				"lib/components/position_component.ex"
+			],
+			[
+				"nti",
+				"lib/engine/entity.ex"
+			],
+			[
+				"acsys",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"aico",
+				"lib/components/ai_component.ex"
+			],
+			[
+				"pos co",
+				"lib/components/position_component.ex"
+			],
+			[
+				"ac sy",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"vel s",
+				"lib/systems/velocity_system.ex"
+			],
+			[
+				"act sys",
+				"lib/systems/action_system.ex"
+			],
+			[
+				"ai c omp",
+				"lib/components/ai_component.ex"
+			],
+			[
+				"pos com",
+				"lib/components/position_component.ex"
+			],
+			[
+				"phys",
+				"lib/engine/physics.ex"
+			],
+			[
+				"id com",
+				"lib/components/id_component.ex"
+			],
+			[
+				"pos",
+				"lib/components/position_component.ex"
+			],
+			[
+				"regist",
+				"lib/otp/registry.ex"
 			],
 			[
 				"mix.ex",
 				"mix.exs"
-			],
-			[
-				"loop",
-				"apps/ecs/lib/engine/loop.ex"
 			],
 			[
 				"timesys",
@@ -1378,174 +1505,6 @@
 			[
 				".css",
 				"apps/centaur/assets/static/css/teifion.css"
-			],
-			[
-				"userhelper",
-				"apps/centaur/lib/centaur_web/general/helpers/user_helper.ex"
-			],
-			[
-				"picker inp",
-				"apps/centaur/lib/centaur_web/templates/general/picker/picker_input.html.eex"
-			],
-			[
-				"ickerstr",
-				"apps/centaur/lib/centaur_web/templates/general/picker/picker_script.html.eex"
-			],
-			[
-				"tab perm",
-				"apps/centaur/lib/centaur_web/templates/general/user/tab_permissions.html.eex"
-			],
-			[
-				"adm help",
-				"apps/centaur/lib/centaur_web/general/helpers/admin_helper.ex"
-			],
-			[
-				"gen adm view",
-				"apps/centaur/lib/centaur_web/general/views/admin_view.ex"
-			],
-			[
-				"user view",
-				"apps/centaur/lib/centaur_web/general/views/user_view.ex"
-			],
-			[
-				"doc filecontr",
-				"apps/centaur/lib/centaur_web/docstore/controllers/file_controller.ex"
-			],
-			[
-				"browe show.htm",
-				"apps/centaur/lib/centaur_web/templates/docstore/browser/show.html.eex"
-			],
-			[
-				"docsto browcont",
-				"apps/centaur/lib/centaur_web/docstore/controllers/browser_controller.ex"
-			],
-			[
-				"tjso",
-				"apps/centaur/lib/centaur_web/templates/layout/tjsoftware.html.eex"
-			],
-			[
-				"tjsoft subme",
-				"apps/centaur/lib/centaur_web/templates/tj_software/general/sub_menu.html.eex"
-			],
-			[
-				"tjso index",
-				"apps/centaur/lib/centaur_web/templates/tj_software/general/index.html.eex"
-			],
-			[
-				"file.e",
-				"apps/centaur/lib/centaur_web/docstore/models/file.ex"
-			],
-			[
-				"prod",
-				"apps/centaur/config/prod.exs"
-			],
-			[
-				"dev.ex",
-				"apps/centaur/config/dev.exs"
-			],
-			[
-				"config",
-				"apps/centaur/config/config.exs"
-			],
-			[
-				"filelib",
-				"apps/centaur/lib/centaur_web/docstore/lib/file_lib.ex"
-			],
-			[
-				"fil.hmt",
-				"apps/centaur/lib/centaur_web/templates/bedrock/report/file_system.html.eex"
-			],
-			[
-				"docstore file form",
-				"apps/centaur/lib/centaur_web/templates/docstore/file/form.html.eex"
-			],
-			[
-				"doctstore file contr",
-				"apps/centaur/lib/centaur_web/docstore/controllers/file_controller.ex"
-			],
-			[
-				"userfile contr",
-				"apps/centaur/lib/centaur_web/bedrock/controllers/user_file_controller.ex"
-			],
-			[
-				"userfileshow",
-				"apps/centaur/lib/centaur_web/templates/bedrock/user_file/show.html.eex"
-			],
-			[
-				"user file form",
-				"apps/centaur/lib/centaur_web/templates/bedrock/user_file/form.html.eex"
-			],
-			[
-				"userfi",
-				"apps/centaur/lib/centaur_web/bedrock/lib/user_file_lib.ex"
-			],
-			[
-				"userfile",
-				"apps/centaur/lib/centaur_web/bedrock/models/user_file.ex"
-			],
-			[
-				"app js",
-				"apps/centaur/assets/js/app.js"
-			],
-			[
-				"editperm",
-				"apps/centaur/lib/centaur_web/templates/general/user/edit_permissions.html.eex"
-			],
-			[
-				"user show",
-				"apps/centaur/lib/centaur_web/templates/general/user/show.html.eex"
-			],
-			[
-				"gen start",
-				"apps/centaur/lib/centaur_web/general/lib/startup.ex"
-			],
-			[
-				"permlib",
-				"apps/centaur/lib/centaur_web/acl/lib/permission_lib.ex"
-			],
-			[
-				"bedstart",
-				"apps/centaur/lib/centaur_web/bedrock/lib/startup.ex"
-			],
-			[
-				"startup",
-				"apps/centaur/lib/centaur_web/acl/startup.ex"
-			],
-			[
-				"userhelp",
-				"apps/centaur/lib/centaur_web/general/helpers/user_helper.ex"
-			],
-			[
-				"user tabperm",
-				"apps/centaur/lib/centaur_web/templates/general/user/tab_permissions.html.eex"
-			],
-			[
-				"user tabdeta",
-				"apps/centaur/lib/centaur_web/templates/general/user/tab_details.html.eex"
-			],
-			[
-				"user tabdet",
-				"apps/centaur/lib/centaur_web/templates/bedrock/user_file/tab_details.html.eex"
-			],
-			[
-				"permhel",
-				"apps/centaur/lib/centaur_web/acl/helpers/permission_helper.ex"
-			],
-			[
-				"user action",
-				"apps/centaur/lib/centaur_web/templates/general/user/actions.html.eex"
-			],
-			[
-				"user show.h",
-				"apps/centaur/lib/centaur_web/templates/general/user/show.html.eex"
-			],
-			[
-				"user.e",
-				"apps/centaur/lib/centaur_web/general/models/user.ex"
-			],
-			[
-				"user index",
-				"apps/centaur/lib/centaur_web/templates/general/user/index.html.eex"
 			]
 		],
 		"width": 0.0
