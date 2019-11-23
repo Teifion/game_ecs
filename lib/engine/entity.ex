@@ -74,15 +74,22 @@ defmodule GameEcs.Entity do
       c.type == component_type
     end)
   end
+
+  @doc """
+  Gets a singular component (of a specific type) from an entity
+  """
+  def get_component(entity_id, component_type) do
+    get_components(entity_id)
+    |> Enum.filter(fn c -> c.state.type == :"Elixir.GameEcs.#{component_type}" end)
+    |> hd
+    |> Map.get(:state)
+  end
   
   @doc """
   Gets a singular value from a singular component of this enttiy
   """
   def get_component_property(entity_id, component_type, property_name) do
-    get_components(entity_id)
-    |> Enum.filter(fn c -> c.state.type == :"Elixir.GameEcs.#{component_type}" end)
-    |> hd
-    |> Map.get(:state)
+    get_component(entity_id, component_type)
     |> Map.get(property_name)
   end
 end

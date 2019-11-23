@@ -1,6 +1,9 @@
 defmodule GameEcs.Maths do
-  def deg2rad(d), do: d * (:math.pi/180)
-  def rad2deg(r), do: r * (180/:math.pi)
+  @pi :math.pi
+  @pi2 :math.pi*2
+  
+  def deg2rad(d), do: d * (@pi/180)
+  def rad2deg(r), do: r * (180/@pi)
 
   # Easy method for limiting a number between two points
   # call with parameter to limit plus or minus
@@ -15,8 +18,8 @@ defmodule GameEcs.Maths do
 
   def angle(a) do
     cond do
-      a < 0 -> angle(a + 360)
-      a > 360 -> angle(a - 360)
+      a < 0 -> angle(a + @pi2)
+      a > @pi2 -> angle(a - @pi2)
       true -> a
     end
   end
@@ -35,12 +38,12 @@ defmodule GameEcs.Maths do
   def shortest_angle(a1, a2) do
     cond do
       # Standard closer/further
-      a1 > a2 and a1 - a2 < 180 -> :left
-      a2 > a1 and a2 - a1 < 180 -> :right
+      a1 > a2 and a1 - a2 < @pi -> :left
+      a2 > a1 and a2 - a1 < @pi -> :right
 
       # These cover when you need to cross 0 degrees
-      a1 > a2 and a1 - a2 > 180 -> :right
-      a2 > a1 and a2 - a1 > 180 -> :left
+      a1 > a2 and a1 - a2 > @pi -> :right
+      a2 > a1 and a2 - a1 > @pi -> :left
     end
   end
 
@@ -54,8 +57,8 @@ defmodule GameEcs.Maths do
       direction == :right and a2 > a1 -> a2 - a1
 
       # These cover when you need to cross 0 degrees 
-      direction == :left and a1 < a2 -> 360 - (a2 - a1)
-      direction == :right and a2 < a1 -> 360 - (a1 - a2)
+      direction == :left and a1 < a2 -> @pi2 - (a2 - a1)
+      direction == :right and a2 < a1 -> @pi2 - (a1 - a2)
     end
   end
   

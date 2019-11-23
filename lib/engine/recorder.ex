@@ -32,7 +32,7 @@ defmodule GameEcs.Recorder do
     |> Enum.join(", ")
     
     # Shorten entity names, TODO: use a flag for this
-    msg = Regex.replace(~r/([a-zA-Z0-9_\-]{12})[a-zA-Z0-9_\-]{52}/, msg, "\\1")
+    msg = formatter(msg)
     
     msg = "#{msg} -- #{tag_string}"
     
@@ -60,12 +60,16 @@ defmodule GameEcs.Recorder do
     {:noreply, new_state}
   end
   
+  defp formatter(msg) do
+    Regex.replace(~r/([a-zA-Z0-9_\-]{12})[a-zA-Z0-9_\-]{52}/, msg, "\\1")
+  end
+  
   def init(_args) do
     {:ok, %{
       entries: [],
       prefs: %{
         method: :whitelist,
-        tags: [:ai, :turn, :thrust, :thrust_system]
+        tags: [:turn]
       }
     }}
   end

@@ -1,5 +1,6 @@
 defmodule GameEcs.Loader do
   # use GenServer
+  import GameEcs.Maths, only: [deg2rad: 1]
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)
@@ -24,19 +25,18 @@ defmodule GameEcs.Loader do
   def _load_ships(ships) do
     ships
     |> Enum.map(fn s ->
-      if s["name"] == "Ship 1" do
-        GameEcs.Ship.new(
-          position: [s["position"], s["velocity"], s["facing"]],
-          specs: [s["acceleration"]],
-          team: s["team"],
-        )
-      else
-        GameEcs.Ship.new(
-          position: [s["position"], s["velocity"], s["facing"]],
-          specs: [s["acceleration"]],
-          team: s["team"],
-        )
-      end
+      GameEcs.Ship.new(
+        position: [s["position"], s["velocity"], _parse_angle(s["facing"])],
+        specs: [s["acceleration"]],
+        team: s["team"],
+      )
     end)
   end
+  
+  
+  defp _parse_angle(v) when is_list(v) do
+    Enum.map(v, &_parse_angle/1)
+  end
+  
+  defp _parse_angle(v), do: deg2rad(v)
 end

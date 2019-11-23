@@ -46,12 +46,6 @@ defmodule GameEcs.ThrustSystem do
       %{}
     end
     
-    IO.puts ""
-    IO.inspect {pos_c.fxy, pos_c.fyz}
-    IO.inspect new_facing
-    IO.puts ""
-    
-
     new_state = pos_c
     |> Map.merge(new_facing)
     |> Map.merge(new_velocity)
@@ -60,9 +54,9 @@ defmodule GameEcs.ThrustSystem do
     
     Recorder.record("Updated #{entity_id} velocity to #{inspect new_velocity}", [:thrust_system, :turn])
     
-    IO.puts "NS"
-    IO.inspect new_state
-    IO.puts ""
+    # IO.puts "NS"
+    # IO.inspect new_state
+    # IO.puts ""
 
     GameEcs.Component.update(pid, new_state)
   end

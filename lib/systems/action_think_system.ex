@@ -7,6 +7,7 @@ defmodule GameEcs.ActionThinkSystem do
   alias GameEcs.Component
   alias GameEcs.ComponentRegistry
   alias GameEcs.Entity
+  alias GameEcs.Maths
 
   def process do
     ComponentRegistry.get("AiComponent")
@@ -57,9 +58,25 @@ defmodule GameEcs.ActionThinkSystem do
     
     Map.put(self_state, :target, target)
   end
-  
+
   defp face_target(self_state) do
-    self_state = Map.put(self_state, :ai_turn, {45, -45})
+    this = Entity.get_component(self_state.entity, "PositionComponent")
+    target = Entity.get_component(self_state.target, "PositionComponent")
+    
+    IO.puts "face_target"
+    IO.inspect this
+    IO.inspect target
+    IO.puts ""
+    
+    target_facing = Maths.calculate_angle({this.posx, this.posy, this.posz}, {target.posx, target.posy, target.posz})
+    
+    # IO.puts ""
+    # IO.inspect target_facing
+    # IO.puts ""
+    
+    
+    new_turn = {0, 0}
+    self_state = Map.put(self_state, :ai_turn, new_turn)
 
     Recorder.record("Updated #{self_state.entity} ai_turn to #{inspect self_state.ai_turn}", [:action_system, :face_target])
 

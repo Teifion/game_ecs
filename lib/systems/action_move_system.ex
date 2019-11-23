@@ -3,6 +3,7 @@ defmodule GameEcs.ActionMoveSystem do
     Increments ages of AgeComponents
   """
 
+  alias GameEcs.Maths
   alias GameEcs.ComponentRegistry
   alias GameEcs.Recorder
   import GameEcs.Maths, only: [limit: 2, limit: 3]
@@ -12,14 +13,13 @@ defmodule GameEcs.ActionMoveSystem do
     |> Enum.filter(&dispatch_filter/1)
     |> Enum.each(&dispatch/1)
   end
-  
+
   defp dispatch_filter({_entity_id, [%{state: _ai_c}, %{state: specs_c}]}) do
     specs_c.thrust > 0 or specs_c.turn_speed > 0
   end
 
-
   defp do_turn(ai_c, specs_c) do
-    new_turn = {90, 90}
+    new_turn = ai_c.ai_turn
 
     {tx, ty} = new_turn
     Recorder.record("Updated #{ai_c.entity} ai_turn to #{inspect {tx, ty}}", [:ai, :turn])
@@ -28,10 +28,9 @@ defmodule GameEcs.ActionMoveSystem do
       ai_turn: new_turn
     })
   end
-  
-  
+
   defp do_thrust(ai_c, specs_c) do
-    new_thrust = 10
+    new_thrust = ai_c.ai_thrust
     
     Recorder.record("Updated #{ai_c.entity} ai_thrust to #{inspect new_thrust}", [:ai, :thrust])
     
@@ -44,11 +43,10 @@ defmodule GameEcs.ActionMoveSystem do
     # Max turn
     max_turn = specs_c.turn_speed
     {turn_xy, turn_yz} = ai_c.ai_turn
-    
+
     new_turn = {limit(turn_xy, max_turn), limit(turn_yz, max_turn)}
-    
     new_thrust = limit(ai_c.ai_thrust, specs_c.thrust)
-    
+
     {tx, ty} = new_turn
     Recorder.record("Updated #{ai_c.entity} ai_turn bound at #{inspect {tx, ty}}", [:ai, :turn, :bound])
 

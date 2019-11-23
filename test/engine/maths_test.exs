@@ -20,7 +20,7 @@ defmodule GameEcs.MathsTest do
     ]
 
     for {a1, a2, expected} <- values do
-      result = Maths.shortest_angle(a1, a2)
+      result = Maths.shortest_angle(Maths.deg2rad(a1), Maths.deg2rad(a2))
       assert result == expected, message: "Error with #{a1} -> #{a2}, expected #{expected} but got #{result}"
     end
   end
@@ -41,8 +41,14 @@ defmodule GameEcs.MathsTest do
     ]
 
     for {a1, a2, expected} <- values do
-      result = Maths.angle_distance(a1, a2)
-      assert result == expected, message: "Error with #{a1} -> #{a2}, expected #{expected} but got #{result}"
+      result = Maths.angle_distance(Maths.deg2rad(a1), Maths.deg2rad(a2))
+      |> Float.round(4)
+      
+      expected = expected
+      |> Maths.deg2rad
+      |> Float.round(4)
+      
+      assert result == expected, message: "Error with #{a1} -> #{a2}, expected #{Maths.deg2rad(expected)} but got #{result}"
     end
   end
   
