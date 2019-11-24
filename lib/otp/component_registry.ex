@@ -82,4 +82,11 @@ defmodule GameEcs.ComponentRegistry do
     end)
     |> Map.new
   end
+  
+  def do_updates(components) do
+    components
+    |> Enum.map(fn {pid, new_state} ->
+      Component.update(pid, new_state)
+    end)
+  end
 end

@@ -86,11 +86,22 @@ defmodule GameEcs.MathsTest do
       {{0, 0}, {4, 4}, Maths.deg2rad(135)},
       {{0, 0}, {-4, 4}, Maths.deg2rad(225)},
       {{0, 0}, {-4, -4}, Maths.deg2rad(315)},
+      
+      
+      {{0, 0}, {0, 0}, 0},
+      {{0, 0}, {0, -4}, 0},
+      {{0, 0}, {4, 0}, Maths.deg2rad(90)},
+      {{0, 0}, {0, 4}, Maths.deg2rad(180)},
+      {{0, 0}, {-4, 0}, Maths.deg2rad(270)},
+
+      {{10, 0}, {103, 0}, Maths.deg2rad(90)},
+      {{10, -1}, {103, 0}, 1.58154},# Approx 91 degrees
+
     ]
 
     for {p1, p2, expected} <- values do
       result = Maths.calculate_angle(p1, p2)
-      assert result == expected, message: "Error with #{inspect p1} -> #{inspect p2}, expected #{inspect {expected, deg(expected)}} but got #{inspect {result, deg(result)}}"
+      assert round(result,2) == round(expected, 2), message: "Error with #{inspect p1} -> #{inspect p2}, expected #{inspect deg expected} but got #{inspect deg result}"
     end
     
     # 3D stuff

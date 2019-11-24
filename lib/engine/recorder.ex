@@ -75,7 +75,7 @@ defmodule GameEcs.Recorder do
       entities: %{},
       prefs: %{
         method: :whitelist,
-        tags: [:velocity_system]
+        tags: [:tick]
       }
     }}
   end

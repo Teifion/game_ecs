@@ -11,7 +11,8 @@ defmodule GameEcs.ActionThinkSystem do
 
   def process do
     ComponentRegistry.get("AiComponent")
-    |> Enum.each(fn (pid) -> dispatch(pid) end)
+    |> Enum.map(&dispatch/1)
+    |> Enum.each(&ComponentRegistry.do_updates/1)
   end
 
   # dispatch() is a reducer that takes in a state and an action and returns a new state
@@ -27,9 +28,10 @@ defmodule GameEcs.ActionThinkSystem do
     # Potentially move towards the target
     state = if state.target != nil, do: approach_target(state), else: state
     
-    GameEcs.Component.update(pid, state)
+    # GameEcs.Component.update(pid, state)
+    [{pid, state}]
   end
-  
+
   # defp reset_flags(state) do
   #   Map.merge(state, %{
   #     ai_turn: nil,
@@ -37,7 +39,7 @@ defmodule GameEcs.ActionThinkSystem do
   #   })
   # end
 
-  defp acquire_target(self_state) do
+  def acquire_target(self_state) do
     # We need to know what team we're on
     team = Entity.get_component_property(self_state.entity, "TeamComponent", :team)
 
@@ -54,26 +56,30 @@ defmodule GameEcs.ActionThinkSystem do
     # Now select one at random
     target = Enum.random(entity_list)
     
-    Recorder.record("Updated #{self_state.entity} target to #{target}", [:action_system, :acquire_target])
-    
+    Recorder.record("#{self_state.entity} set target to #{target}", [:action_system, :acquire_target])
+
     Map.put(self_state, :target, target)
   end
 
-  defp face_target(self_state) do
+  def face_target(self_state) do
     this = Entity.get_component(self_state.entity, "PositionComponent")
     target = Entity.get_component(self_state.target, "PositionComponent")
 
     # Get the desired facing
     {txy, tyz} = Maths.calculate_angle({this.posx, this.posy, this.posz}, {target.posx, target.posy, target.posz})
-    
+
     # Now set the AI turn to take us towards the desired facing
     new_turn = {
       Maths.angle_adjust(this.fxy, txy),
-      Maths.angle_adjust(this.fxy, txy),
+      Maths.angle_adjust(this.fyz, tyz),
     }
-
+    
     if self_state.ai_turn != new_turn do
-      Recorder.record("Updated #{self_state.entity} ai_turn to r#{inspect new_turn}", [:action_system, :face_target])
+      if self_state.ai_turn == {0, 0} do
+        Recorder.record("#{self_state.entity} ai_turn turn completed r#{inspect {txy, tyz}}", [:action_system, :face_target])
+      else
+        Recorder.record("#{self_state.entity} ai_turn turning r#{inspect new_turn} from r#{inspect {this.fxy, this.fyz}} aiming for r#{inspect {txy, tyz}}", [:action_system, :face_target])
+      end
     end
 
     self_state = Map.put(self_state, :ai_turn, new_turn)
@@ -81,7 +87,7 @@ defmodule GameEcs.ActionThinkSystem do
     self_state
   end
   
-  defp approach_target(self_state) do
+  def approach_target(self_state) do
     {txy, tyz} = self_state.ai_turn
     
     # Only thrust if we're facing the right way
@@ -92,7 +98,7 @@ defmodule GameEcs.ActionThinkSystem do
     end
     
     if self_state.ai_thrust != new_thrust do
-      Recorder.record("Updated #{self_state.entity} ai_thrust to #{inspect new_thrust}", [:action_system, :approach_target])
+      Recorder.record("#{self_state.entity} ai_thrust to #{inspect new_thrust}", [:action_system, :approach_target])
     end
     
     self_state = Map.put(self_state, :ai_thrust, new_thrust)

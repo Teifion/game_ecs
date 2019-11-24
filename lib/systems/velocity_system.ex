@@ -20,8 +20,10 @@ defmodule GameEcs.VelocitySystem do
       posz: s.posz + s.velz,
     })
 
-    Recorder.record("Updated #{s.entity} position to #{inspect {new_state.posx, new_state.posy, new_state.posz}}", [:velocity_system])
-
+    if s.velx != 0 or s.vely != 0 or s.velz != 0 do
+      Recorder.record("Updated #{s.entity} position to #{inspect {new_state.posx, new_state.posy, new_state.posz}}", [:velocity_system])
+    end
+    
     GameEcs.Component.update(pid, new_state)
   end
 end

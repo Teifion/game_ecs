@@ -4,21 +4,31 @@
       "name": "Ship 1",
       "team": "Team 1",
       
-      "facing": [0, 0],
+      "facing": [0, 90],
       "position": [0, 0, 0],
       "velocity": [0, 0, 0],
-      "acceleration": 6,
-      "turn": 15
+      "acceleration": 10,
+      "turn": 45
     },
     {
       "name": "Ship 2",
       "team": "Team 2",
 
-      "facing": [0, 0],
+      "facing": [0, 90],
       "position": [100, 0, 0],
       "velocity": [1, 0, 0],
       "acceleration": 0,
       "turn": 0
+    }
+  ],
+  "teams": [
+    {
+      "name": "Team 1",
+      "colour": "#AA0000"
+    },
+    {
+      "name": "Team 2",
+      "colour": "#0000AA"
     }
   ]
 }

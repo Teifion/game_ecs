@@ -2,7 +2,10 @@ defmodule GameEcs.Maths do
   @pi :math.pi
   @pi2 :math.pi*2
   
+  def deg2rad({a, b}), do: {deg2rad(a), deg2rad(b)}
   def deg2rad(d), do: d * (@pi/180)
+
+  def rad2deg({a, b}), do: {rad2deg(a), rad2deg(b)}
   def rad2deg(r), do: r * (180/@pi)
 
   # Easy method for limiting a number between two points
@@ -23,13 +26,13 @@ defmodule GameEcs.Maths do
       true -> a
     end
   end
-  
+
   def distance({x1, y1}, {x2, y2}) do
-    a = abs(x1 - x2)
-    b = abs(y1 - y2)
+    a = x1 - x2
+    b = y1 - y2
     :math.sqrt((a*a) + (b*b))
   end
-  
+
   @doc """
   Given angles a1 and a2 returns a left/right atom
   saying which way is the shortest way to turn
@@ -101,10 +104,10 @@ defmodule GameEcs.Maths do
       dx < 0 and dy == 0 -> deg2rad(270) # Go left
       dx > 0 and dy == 0 -> deg2rad(90) # Go right
       
-      dx > 0 and dy < 0 -> {dx,      abs(dy), 0} # Right, up
-      dx > 0 and dy > 0 -> {dx,      dy,      deg2rad(90)} # Right, down
-      dx < 0 and dy > 0 -> {abs(dx), dy,      deg2rad(180)} # Left, down
-      dx < 0 and dy < 0 -> {abs(dx), abs(dy), deg2rad(270)} # Left, up
+      dx > 0 and dy < 0 -> {abs(dx), abs(dy), 0} # Right, up
+      dx > 0 and dy > 0 -> {abs(dy), abs(dx), deg2rad(90)} # Right, down
+      dx < 0 and dy > 0 -> {abs(dx), abs(dy), deg2rad(180)} # Left, down
+      dx < 0 and dy < 0 -> {abs(dy), abs(dx), deg2rad(270)} # Left, up
     end
 
     case sides do
