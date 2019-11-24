@@ -10,12 +10,20 @@ defmodule GameEcs.Recorder do
     GenServer.cast(__MODULE__, {:record, msg, []})
   end
   
+  def record(msg) do
+    GenServer.cast(__MODULE__, {:record, msg, []})
+  end
+  
   def record(msg, tags) when is_atom(tags) do
     GenServer.cast(__MODULE__, {:record, msg, [tags]})
   end
   
   def record(msg, tags) do
     GenServer.cast(__MODULE__, {:record, msg, tags})
+  end
+  
+  def add_entity(entity_id, entity_data) do
+    GenServer.cast(__MODULE__, {:add_entity, entity_id, entity_data})
   end
   
   def dump() do
@@ -27,17 +35,6 @@ defmodule GameEcs.Recorder do
   end
   
   def handle_cast({:record, msg, tags}, state) do
-    tag_string = tags
-    |> Enum.map(&to_string/1)
-    |> Enum.join(", ")
-    
-    # Shorten entity names, TODO: use a flag for this
-    msg = formatter(msg)
-    
-    msg = "#{msg} -- #{tag_string}"
-    
-    
-    
     flag = if state.prefs.method == :whitelist do
       tags
       |> Stream.filter(fn t -> t in state.prefs.tags end)
@@ -50,15 +47,23 @@ defmodule GameEcs.Recorder do
       not f
     end
 
-    new_state = if flag do
-      Logger.debug fn -> msg end
-      Map.put(state, :entries, state.entries ++ [msg])
-    else
-      state
+    # Do we output the message into the debugger?
+    if flag do
+      tag_string = tags
+      |> Enum.map(&to_string/1)
+      |> Enum.join(", ")
+      
+      Logger.debug fn -> "#{formatter(msg)} -- #{tag_string}" end
     end
     
-    {:noreply, new_state}
+    {:noreply, Map.put(state, :logs, state.logs ++ [{msg, tags}])}
   end
+  
+  def handle_cast({:add_entity, entity_id, entity_data}, state) do
+    {:noreply, Map.put(state, :entities, Map.put(state.entities, entity_id, entity_data))}
+  end
+  
+  
   
   defp formatter(msg) do
     Regex.replace(~r/([a-zA-Z0-9_\-]{12})[a-zA-Z0-9_\-]{52}/, msg, "\\1")
@@ -66,10 +71,11 @@ defmodule GameEcs.Recorder do
   
   def init(_args) do
     {:ok, %{
-      entries: [],
+      logs: [],
+      entities: %{},
       prefs: %{
         method: :whitelist,
-        tags: [:turn]
+        tags: [:velocity_system]
       }
     }}
   end

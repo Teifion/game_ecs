@@ -16,7 +16,7 @@ defmodule GameEcs.SpecsComponent do
     GameEcs.Component.new(@component_type, initial_state)
   end
   
-  def new([[thrust, turn_speed]]) do
+  def new([thrust, turn_speed]) do
     new(%{
       thrust: thrust, turn_speed: turn_speed,
     })

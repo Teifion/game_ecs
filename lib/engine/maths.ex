@@ -34,9 +34,12 @@ defmodule GameEcs.Maths do
   Given angles a1 and a2 returns a left/right atom
   saying which way is the shortest way to turn
   """
-  @spec shortest_angle(float, float) :: :left | :right
+  @spec shortest_angle(float, float) :: :equal | :left | :right
   def shortest_angle(a1, a2) do
     cond do
+      # Both the same?
+      a1 == a2 -> :equal
+
       # Standard closer/further
       a1 > a2 and a1 - a2 < @pi -> :left
       a2 > a1 and a2 - a1 < @pi -> :right
@@ -47,11 +50,18 @@ defmodule GameEcs.Maths do
     end
   end
 
+  @doc """
+  Calculates the shortest angular distance between two angles, takes into
+  account if the angles are either side of the 0/360 line
+  """
   @spec angle_distance(float, float) :: float
   def angle_distance(a1, a2) do
     direction = shortest_angle(a1, a2)
 
     cond do
+      # Same direction already?
+      direction == :equal -> 0
+
       # Standard closer/further
       direction == :left and a1 > a2 -> a1 - a2
       direction == :right and a2 > a1 -> a2 - a1
@@ -62,7 +72,22 @@ defmodule GameEcs.Maths do
     end
   end
   
+  @doc """
+  Given two angles, returns the actual adjustment needed to go from angle1 to angle 2
+  """
+  @spec angle_adjust(float, float) :: float
+  def angle_adjust(a1, a2) do
+    case shortest_angle(a1, a2) do
+      :equal -> 0
+      :left -> -angle_distance(a1, a2)
+      :right -> angle_distance(a1, a2)
+    end
+  end
   
+  
+  @doc """
+  Calculates the angle between two points in a 2D or 3D space, if 2D then one angle is returned, if 3D then a pair are returned for XY and YZ
+  """
   @spec calculate_angle({float, float}, {float, float}) :: float
   def calculate_angle({x1, y1}, {x2, y2}) do
     dx = x2 - x1

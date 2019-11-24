@@ -20,9 +20,9 @@ defmodule GameEcs.ActionMoveSystem do
 
   defp do_turn(ai_c, specs_c) do
     new_turn = ai_c.ai_turn
-
+    
     {tx, ty} = new_turn
-    Recorder.record("Updated #{ai_c.entity} ai_turn to #{inspect {tx, ty}}", [:ai, :turn])
+    # Recorder.record("Updated #{ai_c.entity} ai_turn to r#{inspect {tx, ty}}", [:ai, :turn])
     
     ai_c = Map.merge(ai_c, %{
       ai_turn: new_turn
@@ -32,7 +32,7 @@ defmodule GameEcs.ActionMoveSystem do
   defp do_thrust(ai_c, specs_c) do
     new_thrust = ai_c.ai_thrust
     
-    Recorder.record("Updated #{ai_c.entity} ai_thrust to #{inspect new_thrust}", [:ai, :thrust])
+    # Recorder.record("Updated #{ai_c.entity} ai_thrust to #{inspect new_thrust}", [:ai, :thrust])
     
     ai_c = Map.merge(ai_c, %{
       ai_thrust: new_thrust
@@ -47,10 +47,14 @@ defmodule GameEcs.ActionMoveSystem do
     new_turn = {limit(turn_xy, max_turn), limit(turn_yz, max_turn)}
     new_thrust = limit(ai_c.ai_thrust, specs_c.thrust)
 
-    {tx, ty} = new_turn
-    Recorder.record("Updated #{ai_c.entity} ai_turn bound at #{inspect {tx, ty}}", [:ai, :turn, :bound])
+    # If changes took place, log them
+    if new_turn != ai_c.ai_turn do
+      Recorder.record("Updated #{ai_c.entity} ai_turn bound at r#{inspect new_turn}", [:ai, :turn, :bound])
+    end
 
-    Recorder.record("Updated #{ai_c.entity} ai_thrust bound to #{inspect new_thrust}", [:ai, :thrust, :bound])
+    if new_thrust != ai_c.ai_thrust do
+      Recorder.record("Updated #{ai_c.entity} ai_thrust bound to #{inspect new_thrust}", [:ai, :thrust, :bound])
+    end
 
     ai_c = Map.merge(ai_c, %{
       ai_turn: new_turn,
@@ -60,28 +64,10 @@ defmodule GameEcs.ActionMoveSystem do
 
   defp dispatch({entity_id, [%{id: pid, state: ai_c}, %{state: specs_c}]}) do
     ai_c = ai_c
+    |> bound_actions(specs_c)
     |> do_turn(specs_c)
     |> do_thrust(specs_c)
-    |> bound_actions(specs_c)
     
-    
-    # IO.puts ""
-    # IO.inspect entity_id
-    # IO.puts ""
-    # IO.inspect ai_c
-    # IO.inspect specs_c
-    # IO.puts ""
-    
-    # %{id: _pid, state: s} = GameEcs.Component.get(pid)
-
-    # new_state = Map.merge(s, %{
-    #   posx: s.posx + s.velx,
-    #   posy: s.posy + s.vely,
-    #   posz: s.posz + s.velz,
-    # })
-
-    # 
-
     GameEcs.Component.update(pid, ai_c)
   end
 end

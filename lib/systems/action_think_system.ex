@@ -24,8 +24,8 @@ defmodule GameEcs.ActionThinkSystem do
     # Turn towards the target
     state = if state.target != nil, do: face_target(state), else: state
 
-    # Move!
-    state = if state.ai_thrust != 0, do: approach_target(state), else: state
+    # Potentially move towards the target
+    state = if state.target != nil, do: approach_target(state), else: state
     
     GameEcs.Component.update(pid, state)
   end
@@ -62,28 +62,41 @@ defmodule GameEcs.ActionThinkSystem do
   defp face_target(self_state) do
     this = Entity.get_component(self_state.entity, "PositionComponent")
     target = Entity.get_component(self_state.target, "PositionComponent")
-    
-    IO.puts "face_target"
-    IO.inspect this
-    IO.inspect target
-    IO.puts ""
-    
-    target_facing = Maths.calculate_angle({this.posx, this.posy, this.posz}, {target.posx, target.posy, target.posz})
-    
-    # IO.puts ""
-    # IO.inspect target_facing
-    # IO.puts ""
-    
-    
-    new_turn = {0, 0}
-    self_state = Map.put(self_state, :ai_turn, new_turn)
 
-    Recorder.record("Updated #{self_state.entity} ai_turn to #{inspect self_state.ai_turn}", [:action_system, :face_target])
+    # Get the desired facing
+    {txy, tyz} = Maths.calculate_angle({this.posx, this.posy, this.posz}, {target.posx, target.posy, target.posz})
+    
+    # Now set the AI turn to take us towards the desired facing
+    new_turn = {
+      Maths.angle_adjust(this.fxy, txy),
+      Maths.angle_adjust(this.fxy, txy),
+    }
+
+    if self_state.ai_turn != new_turn do
+      Recorder.record("Updated #{self_state.entity} ai_turn to r#{inspect new_turn}", [:action_system, :face_target])
+    end
+
+    self_state = Map.put(self_state, :ai_turn, new_turn)
 
     self_state
   end
   
   defp approach_target(self_state) do
+    {txy, tyz} = self_state.ai_turn
+    
+    # Only thrust if we're facing the right way
+    new_thrust = if abs(txy) < 0.1 and abs(tyz) < 0.1 do
+      Entity.get_component_property(self_state.entity, "SpecsComponent", :thrust)
+    else
+      0
+    end
+    
+    if self_state.ai_thrust != new_thrust do
+      Recorder.record("Updated #{self_state.entity} ai_thrust to #{inspect new_thrust}", [:action_system, :approach_target])
+    end
+    
+    self_state = Map.put(self_state, :ai_thrust, new_thrust)
+    
     self_state
   end
 end

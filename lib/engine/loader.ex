@@ -1,6 +1,7 @@
 defmodule GameEcs.Loader do
   # use GenServer
   import GameEcs.Maths, only: [deg2rad: 1]
+  alias GameEcs.Recorder
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)
@@ -14,6 +15,7 @@ defmodule GameEcs.Loader do
     json = _parse_file(file_path)
     
     _load_ships(json["ships"])
+    |> Enum.each(fn ({sid, sname}) -> Recorder.add_entity(sid, sname) end)
   end
 
   def _parse_file(file_path) do
@@ -25,18 +27,20 @@ defmodule GameEcs.Loader do
   def _load_ships(ships) do
     ships
     |> Enum.map(fn s ->
-      GameEcs.Ship.new(
-        position: [s["position"], s["velocity"], _parse_angle(s["facing"])],
-        specs: [s["acceleration"]],
+      ship = GameEcs.Ship.new(
+        position: [s["position"], s["velocity"], _angle(s["facing"])],
+        specs: [s["acceleration"], _angle(s["turn"])],
         team: s["team"],
       )
+      
+      {ship.id, %{name: s["name"]}}
     end)
   end
   
   
-  defp _parse_angle(v) when is_list(v) do
-    Enum.map(v, &_parse_angle/1)
+  defp _angle(v) when is_list(v) do
+    Enum.map(v, &_angle/1)
   end
   
-  defp _parse_angle(v), do: deg2rad(v)
+  defp _angle(v), do: deg2rad(v)
 end

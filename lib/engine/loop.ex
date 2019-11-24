@@ -50,6 +50,9 @@ defmodule GameEcs.Loop do
         Process.send_after(self(), :send_update, 0)
       end
     else
+      Recorder.dump()
+      |> GameEcs.Export.export_logs
+      
       IO.puts "max_ticks reached"
     end
     

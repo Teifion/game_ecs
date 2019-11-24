@@ -7,7 +7,8 @@
       "facing": [0, 0],
       "position": [0, 0, 0],
       "velocity": [0, 0, 0],
-      "acceleration": [6, 15]
+      "acceleration": 6,
+      "turn": 15
     },
     {
       "name": "Ship 2",
@@ -16,7 +17,8 @@
       "facing": [0, 0],
       "position": [100, 0, 0],
       "velocity": [1, 0, 0],
-      "acceleration": [0, 0]
+      "acceleration": 0,
+      "turn": 0
     }
   ]
 }

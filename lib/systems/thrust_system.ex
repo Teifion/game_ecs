@@ -50,7 +50,7 @@ defmodule GameEcs.ThrustSystem do
     |> Map.merge(new_facing)
     |> Map.merge(new_velocity)
 
-    Recorder.record("Updated #{entity_id} facing to #{inspect new_facing}", [:thrust_system, :turn])
+    Recorder.record("Updated #{entity_id} facing to r#{inspect {new_facing.fxy, new_facing.fyz}}", [:thrust_system, :turn])
     
     Recorder.record("Updated #{entity_id} velocity to #{inspect new_velocity}", [:thrust_system, :turn])
     

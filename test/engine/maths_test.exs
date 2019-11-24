@@ -3,9 +3,17 @@ defmodule GameEcs.MathsTest do
   alias GameEcs.Maths
   
   defp deg(v), do: round(Maths.rad2deg(v))
+  
+  defp round(0, p), do: 0
+  defp round(v, p), do: Float.round(v, p)
 
   test "shortest angle" do
     values = [
+      # Already the equal
+      {0, 0, :equal},
+      {40, 40, :equal},
+      # {0, 360, :equal},
+      
       # Standard angles, both right of 0 degrees
       {20, 30, :right},
       {20, 10, :left},
@@ -27,6 +35,10 @@ defmodule GameEcs.MathsTest do
   
   test "angle_distance" do
     values = [
+      # Already equal
+      {0, 0, 0},
+      {40, 40, 0},
+      
       # Standard angles, both right of 0 degrees
       {20, 30, 10},
       {20, 10, 10},
@@ -42,11 +54,11 @@ defmodule GameEcs.MathsTest do
 
     for {a1, a2, expected} <- values do
       result = Maths.angle_distance(Maths.deg2rad(a1), Maths.deg2rad(a2))
-      |> Float.round(4)
+      |> round(4)
       
       expected = expected
       |> Maths.deg2rad
-      |> Float.round(4)
+      |> round(4)
       
       assert result == expected, message: "Error with #{a1} -> #{a2}, expected #{Maths.deg2rad(expected)} but got #{result}"
     end
