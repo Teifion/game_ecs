@@ -2,6 +2,15 @@ Engine todo
  - Conevert all internal representations of numbers into Decimals
 
 Features todo
+ - Damage
+  - Hull
+  - Armour
+  - Shields
+  - Effects of damage
  - Weapons
+  - Scan hit
+  - Guided projectiles
+  - Unguided projectiles
  - ECM
- - GForce
+ - Crew
+  - GForce

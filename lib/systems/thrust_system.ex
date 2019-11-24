@@ -58,8 +58,4 @@ defmodule GameEcs.ThrustSystem do
 
     [{pid, new_state}]
   end
-  
-  def do_thrust do
-    
-  end
 end
